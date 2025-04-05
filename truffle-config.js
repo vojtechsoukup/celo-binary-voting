@@ -21,8 +21,9 @@ module.exports = {
     alfajores: {
       provider: kit.web3.currentProvider,
       network_id: 44787,
-      gas: 8000000,
-      gasPrice: 10000000000
+      gas: 4000000,
+      gasPrice: 5000000000,
+      from: account.address
     }
   },
   compilers: {

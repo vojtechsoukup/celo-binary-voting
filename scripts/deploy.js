@@ -4,41 +4,48 @@ require('dotenv').config();
 
 async function deployContract() {
     try {
-        // Initialize ContractKit with the Alfajores testnet
+        // Connect to the network
         const web3 = new Web3('https://alfajores-forno.celo-testnet.org');
         const kit = ContractKit.newKitFromWeb3(web3);
 
         // Add account
         const account = web3.eth.accounts.privateKeyToAccount(process.env.PRIVATE_KEY);
         kit.connection.addAccount(account.privateKey);
-        const address = account.address;
-
-        console.log('Deploying from account:', address);
-
-        // Get contract artifacts
+        
+        // Get the contract artifacts
         const BinaryVoting = require('../build/contracts/BinaryVoting.json');
-
+        
         // Create contract instance
-        const instance = new kit.connection.web3.eth.Contract(BinaryVoting.abi);
+        const contract = new kit.connection.web3.eth.Contract(BinaryVoting.abi);
+        
+        // Get account balance
+        const balance = await kit.getTotalBalance(account.address);
+        console.log('Account balance:', balance.CELO.toString());
+        
+        // Get current gas price
+        const gasPrice = await web3.eth.getGasPrice();
+        console.log('Current network gas price:', gasPrice);
         
         // Estimate gas
-        const deploy = instance.deploy({
+        const deploy = contract.deploy({
             data: BinaryVoting.bytecode
         });
         
         const gas = await deploy.estimateGas();
+        console.log('Estimated gas:', gas);
         
-        // Deploy contract
+        // Deploy contract with network's gas price
         console.log('Deploying contract...');
         const newContractInstance = await deploy.send({
-            from: address,
-            gas: Math.round(gas * 1.5) // Add 50% buffer to estimated gas
+            from: account.address,
+            gas: Math.floor(gas * 1.5), // Add 50% buffer for safety
+            gasPrice: gasPrice
         });
-
+        
         console.log('Contract deployed at:', newContractInstance.options.address);
         return newContractInstance;
     } catch (error) {
-        console.error('Error deploying contract:', error);
+        console.error('Deployment failed:', error);
         process.exit(1);
     }
 }

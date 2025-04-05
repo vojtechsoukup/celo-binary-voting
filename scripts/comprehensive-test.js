@@ -2,7 +2,7 @@ const ContractKit = require('@celo/contractkit');
 const Web3 = require('web3');
 require('dotenv').config();
 
-const CONTRACT_ADDRESS = '0xa599509b41e66529750c2DBD28B2B6f8B913D281';
+const CONTRACT_ADDRESS = '0x8b2d1FC22937380B7c4fb7C05848e99BAcc2f0E6';
 
 // Simulated voters with different voting patterns
 const VOTING_PATTERNS = [
