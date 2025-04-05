@@ -1,33 +1,33 @@
-# Binary Voting Smart Contract on Celo
+# 🗳️ Binary Voting Smart Contract on Celo
 
 A smart contract for binary voting on the Celo blockchain. This contract allows users to create proposals and vote on them using a simple yes/no (agree/disagree) mechanism.
 
-## Features
+## ✨ Features
 
-- Create new proposals with descriptions
-- Vote on existing proposals (Agree/Disagree)
-- View proposal details including vote counts
-- Prevent double voting
-- Event emission for proposal creation and voting
+- 📝 Create new proposals with descriptions
+- ✅ Vote on existing proposals (Agree/Disagree)
+- 👀 View proposal details including vote counts
+- 🔒 Prevent double voting
+- 📢 Event emission for proposal creation and voting
 
-## Prerequisites
+## 📋 Prerequisites
 
-- MetaMask wallet
-- Celo mainnet configuration in MetaMask
-- Some CELO tokens for transaction fees
+- 🦊 MetaMask wallet
+- 🌐 Celo mainnet configuration in MetaMask
+- 💰 Some CELO tokens for transaction fees
 
-## Smart Contract
+## 📜 Smart Contract
 
 The smart contract is deployed on the Celo mainnet at address: `0x94170E4ef7f2de4f0FA77Eb9b10D0701f6eFf4e2`
 
-### Contract Functions
+### 🔧 Contract Functions
 
 - `addProposal(string description)`: Create a new proposal
 - `vote(uint256 proposalId, bool agree)`: Vote on a proposal
 - `getProposal(uint256 proposalId)`: Get proposal details
 - `getProposalCount()`: Get total number of proposals
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
 ### 1. Configure MetaMask for Celo Mainnet
 
@@ -40,13 +40,13 @@ The smart contract is deployed on the Celo mainnet at address: `0x94170E4ef7f2de
    - Currency Symbol: CELO
    - Block Explorer URL: https://explorer.celo.org
 
-## Usage Guide
+## 📖 Usage Guide
 
 ### Interacting with the Contract
 
 You can interact with the contract directly through the [Celo Explorer](https://explorer.celo.org/address/0x94170E4ef7f2de4f0FA77Eb9b10D0701f6eFf4e2):
 
-#### Creating a Proposal
+#### 📝 Creating a Proposal
 
 1. Go to the [contract page](https://explorer.celo.org/address/0x94170E4ef7f2de4f0FA77Eb9b10D0701f6eFf4e2)
 2. Click on "Write Contract"
@@ -55,7 +55,7 @@ You can interact with the contract directly through the [Celo Explorer](https://
 5. Enter your proposal description in the `description` field
 6. Click "Write" and confirm the transaction in MetaMask
 
-#### Voting on a Proposal
+#### ✅ Voting on a Proposal
 
 1. Go to the [contract page](https://explorer.celo.org/address/0x94170E4ef7f2de4f0FA77Eb9b10D0701f6eFf4e2)
 2. Click on "Write Contract"
@@ -65,14 +65,14 @@ You can interact with the contract directly through the [Celo Explorer](https://
 6. Set `agree` to `true` for "Agree" or `false` for "Disagree"
 7. Click "Write" and confirm the transaction in MetaMask
 
-#### Viewing Proposals
+#### 👀 Viewing Proposals
 
 1. Go to the [contract page](https://explorer.celo.org/address/0x94170E4ef7f2de4f0FA77Eb9b10D0701f6eFf4e2)
 2. Click on "Read Contract"
 3. Use `getProposalCount` to see the total number of proposals
 4. Use `getProposal` to view details of a specific proposal by entering its ID
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 celo-binary-voting/
@@ -81,7 +81,7 @@ celo-binary-voting/
 └── tests/              # Test files
 ```
 
-## Testing
+## 🧪 Testing
 
 ### Run Smart Contract Tests
 
@@ -89,11 +89,11 @@ celo-binary-voting/
 npm test
 ```
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - [Celo](https://celo.org/) for the blockchain platform
 - [OpenZeppelin](https://openzeppelin.com/) for the secure smart contract libraries 
