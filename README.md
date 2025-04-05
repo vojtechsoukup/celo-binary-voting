@@ -16,11 +16,11 @@ A decentralized application (DApp) for binary voting on the Celo blockchain. Thi
 - Node.js (v14 or higher)
 - npm or yarn
 - MetaMask wallet
-- Celo Alfajores testnet configuration in MetaMask
+- Celo mainnet configuration in MetaMask
 
 ## Smart Contract
 
-The smart contract is deployed on the Celo Alfajores testnet at address: `0x8b2d1FC22937380B7c4fb7C05848e99BAcc2f0E6`
+The smart contract is deployed on the Celo mainnet at address: `0x94170E4ef7f2de4f0FA77Eb9b10D0701f6eFf4e2`
 
 ### Contract Functions
 
@@ -44,22 +44,16 @@ cd celo-binary-voting
 npm install
 ```
 
-### 3. Configure MetaMask for Celo Alfajores
+### 3. Configure MetaMask for Celo Mainnet
 
 1. Open MetaMask
 2. Click on the network dropdown and select "Add Network"
 3. Add the following network details:
-   - Network Name: Celo Alfajores Testnet
-   - RPC URL: https://alfajores-forno.celo-testnet.org
-   - Chain ID: 44787
+   - Network Name: Celo Mainnet
+   - RPC URL: https://forno.celo.org
+   - Chain ID: 42220
    - Currency Symbol: CELO
-   - Block Explorer URL: https://alfajores-blockscout.celo-testnet.org
-
-### 4. Get Test CELO
-
-1. Visit the [Celo Alfajores Faucet](https://celo.org/developers/faucet)
-2. Enter your wallet address
-3. Request test CELO tokens
+   - Block Explorer URL: https://explorer.celo.org
 
 ## Running the Application
 
@@ -126,14 +120,6 @@ npm test
 cd frontend
 npm test
 ```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
 
 ## License
 
