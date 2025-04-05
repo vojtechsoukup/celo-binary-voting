@@ -1,0 +1,25 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "BinaryVoting.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.0;\n\n/**\n * @title BinaryVoting\n * @dev A smart contract for binary voting (agree/disagree) on proposals\n */\ncontract BinaryVoting {\n    // ============ Enums ============\n    \n    /// @notice Possible voting choices\n    enum VoteChoice { \n        Agree, \n        Disagree \n    }\n\n    // ============ Structs ============\n    \n    /// @notice Structure representing a voting proposal\n    struct Proposal {\n        string description;      // Description of the proposal\n        uint256 agreeCount;     // Number of agree votes\n        uint256 disagreeCount;  // Number of disagree votes\n    }\n\n    // ============ State Variables ============\n    \n    // Array of all proposals\n    Proposal[] private _proposals;\n\n    // Mapping to track if an address has voted on a proposal\n    mapping(address => mapping(uint256 => bool)) private _hasVoted;\n\n    // ============ Events ============\n    \n    /// @notice Emitted when a new proposal is added\n    event ProposalAdded(\n        uint256 indexed proposalIndex,\n        string description\n    );\n\n    /// @notice Emitted when a vote is cast\n    event VoteCast(\n        address indexed voter,\n        uint256 indexed proposalIndex,\n        VoteChoice choice\n    );\n\n    // ============ External Functions ============\n\n    /**\n     * @notice Adds a new proposal to the voting system\n     * @param description The text describing the proposal\n     */\n    function addProposal(string calldata description) external {\n        _proposals.push(Proposal({\n            description: description,\n            agreeCount: 0,\n            disagreeCount: 0\n        }));\n        emit ProposalAdded(_proposals.length - 1, description);\n    }\n\n    /**\n     * @notice Casts a vote on a proposal\n     * @param proposalIndex The index of the proposal to vote on\n     * @param agree true for agree, false for disagree\n     * @dev Reverts if proposal doesn't exist or voter has already voted\n     */\n    function vote(uint256 proposalIndex, bool agree) external {\n        require(proposalIndex < _proposals.length, \"Invalid proposal\");\n        require(!_hasVoted[msg.sender][proposalIndex], \"Already voted\");\n\n        _hasVoted[msg.sender][proposalIndex] = true;\n\n        if (agree) {\n            _proposals[proposalIndex].agreeCount++;\n            emit VoteCast(msg.sender, proposalIndex, VoteChoice.Agree);\n        } else {\n            _proposals[proposalIndex].disagreeCount++;\n            emit VoteCast(msg.sender, proposalIndex, VoteChoice.Disagree);\n        }\n    }\n\n    // ============ View Functions ============\n\n    /**\n     * @notice Gets details of a specific proposal\n     * @param proposalIndex The index of the proposal\n     * @return description The proposal description\n     * @return agreeCount Number of agree votes\n     * @return disagreeCount Number of disagree votes\n     */\n    function getProposal(uint256 proposalIndex) \n        external \n        view \n        returns (\n            string memory description,\n            uint256 agreeCount,\n            uint256 disagreeCount\n        ) \n    {\n        require(proposalIndex < _proposals.length, \"Invalid proposal\");\n        Proposal memory proposal = _proposals[proposalIndex];\n        return (\n            proposal.description,\n            proposal.agreeCount,\n            proposal.disagreeCount\n        );\n    }\n\n    /**\n     * @notice Gets the total number of proposals\n     * @return The number of proposals\n     */\n    function getProposalCount() external view returns (uint256) {\n        return _proposals.length;\n    }\n}\n"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "london",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers"
+        ]
+      }
+    }
+  }
+}
